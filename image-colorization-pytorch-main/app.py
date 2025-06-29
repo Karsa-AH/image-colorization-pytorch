@@ -5,7 +5,7 @@ from PIL import Image
 from flask import Flask, request, render_template, send_file
 from torchvision import transforms
 from io import BytesIO
-
+import numpy as np
 # Define your custom U-Net
 class UNet(nn.Module):
     def __init__(self):
@@ -58,7 +58,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load model
 model = UNet().to(device)
-model.load_state_dict(torch.load("model/main.pth", map_location=device))
+model.load_state_dict(torch.load("image-colorization-pytorch-main/model/main.pth", map_location=device))
 model.eval()
 
 # Transformation: convert any image to grayscale + resize
